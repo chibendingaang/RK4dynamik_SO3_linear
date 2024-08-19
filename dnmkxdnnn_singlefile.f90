@@ -29,11 +29,11 @@ print*,"after dynamik"
 
 print*,"rank=",rank
 
- open(177,file='./xpdrvn_NNN/L514/5emin3/J2only/spin_a_'//trim(adjustl(seedchar))//'.dat',status='new')
+ open(177,file='./xpdrvn_NNN/L128/5emin3/J2only/spin_a_'//trim(adjustl(seedchar))//'.dat',status='new')
  write(177, *) spin_a
  close(177)
  
- open(187,file='./xpdrvn_NNN/L514/5emin3/J2only/spin_b_'//trim(adjustl(seedchar))//'.dat',status='new')
+ open(187,file='./xpdrvn_NNN/L128/5emin3/J2only/spin_b_'//trim(adjustl(seedchar))//'.dat',status='new')
  write(187, *) spin_b
  close(187)
 

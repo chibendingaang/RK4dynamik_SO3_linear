@@ -6,8 +6,8 @@ save
 
 !List of Input paramters and constants
 real(xd), parameter :: PI =4.0_8*atan(1.0_xd)
-integer, parameter :: L = 514
-integer, parameter :: steps = 200000
+integer, parameter :: L = 128
+integer, parameter :: steps = 80000
 real(xd), parameter :: dt = 0.005_xd
 
 real(xd), parameter :: lambda = 0.0_xd
