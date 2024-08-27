@@ -10,26 +10,27 @@ implicit none
 Contains
 
 !FUNCTION to define periodic boundary conditions
+
+!FUNCTION to define periodic boundary conditions
 Integer function bc(x,L)
     Integer, intent(in) :: x, L
     
-    if (x==L+1) then
-        bc =1
-    else if (x==0) then
-        bc = L
-    else
+    if (x<=0) then
+        bc = x+L
+    else if (x>0 .and. x<=L) then
         bc = x
+    else
+        bc = mod(x,L)
     end if
 
 End function bc
 
-!45 continue
 
+!SUBROUTINE#1: to initialize spins from a random distribution
 
-! SUBROUTINE#1: to initialize spins from a random distribution
 Subroutine InitRandom(spin, eps) 
-
 !Implicit None
+
 ! double precision, intent(in) :: eps 
 real(xd), intent(out) :: spin(3*L)
 real(xd), intent(in) :: eps
@@ -46,17 +47,18 @@ CALL init_genrand(seed1)
 do xi=1,L
         planar(xi) = grnd()
         phi(xi) = grnd()
+        phi(xi) = pi*(2*(phi(xi)) - 1.0_xd)
+        planar(xi) = 2*planar(xi) - 1.0_xd
         if (xi==L/2) then
         planar(xi) = planar(xi) + eps
         end if
-        phi(xi) = pi*(2*(phi(xi)) - 1.0_xd)
-        planar(xi) = 2*planar(xi) - 1.0_xd
+        ! important difference in initialization
         xyplanar(xi) = sqrt(1.0_xd - planar(xi)**2)
     spin(3*xi-2) = xyplanar(xi)*cos(phi(xi))
     spin(3*xi-1) = xyplanar(xi)*sin(phi(xi))
     spin(3*xi)   = planar(xi)
     
-end do
+end do 
 
 ! if x = 2, L-1; then the following spin values are required:
 ! spin(1) = spin(4); spin(2) = spin(5); spin(3) = spin(6)
