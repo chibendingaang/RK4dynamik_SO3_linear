@@ -1,4 +1,6 @@
 MODULE mt19937_128
+use, intrinsic :: iso_fortran_env, only: real128
+
 IMPLICIT NONE
 
 ! Period parameters
