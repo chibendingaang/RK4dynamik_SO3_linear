@@ -1,0 +1,13 @@
+# it's a text file. so the following commands won't implement
+# 031024
+
+for k in ""60 61 62 63 64 65 66 67 68 69""; do mkdir samples_a"$k"00; mkdir samples_b"$k"00; done &
+
+for k in ""60 61 62 63 64 65 66 67 68 69""; do mv spin_a_"$k"[0-9][0-9].dat ./samples_a"$k"00/; done 
+
+for k in ""60 61 62 63 64 65 66 67 68 69""; do mv spin_b_"$k"[0-9][0-9].dat ./samples_b"$k"00/; done 
+
+# samples starting with spin_a/b_6800s don't exist
+# do the same for samples_[a-b]10300 10400
+
+du -sh samples*
