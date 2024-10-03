@@ -8,28 +8,31 @@ implicit none
 
 !List of Input paramters and constants
 real(real128), parameter :: PI =4.0_real128*atan(1.0_real128)
-integer, parameter :: L = 2048
-integer, parameter :: steps = 450000
+integer, parameter :: L = 512
+integer, parameter :: steps = 120000
 real(real128), parameter :: dt = 0.001_real128
 
 real(real128), parameter :: lambda = 0.0_real128
 real(real128), parameter :: mu = 1.0_real128
 !real(real128), parameter :: epsil = 0.001_real128
 real(real128), parameter :: a = dt*(lambda+mu), b = dt*(lambda-mu)
-real(real128), parameter :: J1 = 1.0_real128, J2 = 0.625_real128
+real(real128), parameter :: J1 = 1.0_real128, J2 = 0.250_real128
 
 real(real128), allocatable :: planar(:)
 real(real128), allocatable :: phi(:)
 real(real128), allocatable :: xyplanar(:)
 real(real128) :: totalH, sitemagsq(L) !else it throws an error: sitemag has no IMPLICIT TYPE
 
-integer :: conf !, seedz
+integer :: conf , serialkey_value
+
 real(real128), allocatable :: s_a(:,:), s0_a(:,:)
 real(real128), allocatable :: s_b(:,:), s0_b(:,:)
 real(real128), allocatable :: spin_a(:, :, :), spin_b(:, :, :)
 real(real128), allocatable :: spina(:,:), spinb(:,:)
 real(real128), allocatable :: k1(:,:), k2(:,:), k3(:,:), k4(:,:)
+
 real(real128), allocatable :: H(:,:)
+real(real128), allocatable :: Dxt(:,:)
 
 end module nnnparam_128vec
 
