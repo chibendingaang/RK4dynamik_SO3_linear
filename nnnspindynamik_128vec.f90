@@ -17,9 +17,11 @@ function compute_f(S) result(f)
     ! Computes effective field H from neighbouring contributions
     H = 0.0_real128
     !do i = 1, L
-     H = mu * (J1 * (cshift(S, 1, 2) + cshift(S, -1, 2)) + &
-                          J2 * (cshift(S, 2, 2) + cshift(S, -2, 2)))
+     H = mu * (J1 * (cshift(S, 1, 2) - cshift(S, -1, 2)) + &
+                          J2 * (cshift(S, 2, 2) - cshift(S, -2, 2)))
     !end do
+    ! here taking either mu or lambda is irrelevant as long as the sign tacked
+    ! on to the left/right neighbours dictates the dyanmics
 
     ! Compute cross product S × H
     f(1,:) = S(2,:) * H(3,:) - S(3,:) * H(2,:)
@@ -52,14 +54,14 @@ Subroutine InitRandom(spin, eps)
 real(real128), intent(out) :: spin(3,L)
 real(real128), intent(in) :: eps
 Integer :: xi
-integer :: seed1 !, seed2
-seed1 = conf;
+integer :: seed_val !, seed2
+seed_val = serialkey_value;
 
 ! CALL RANDOM_SEED ()
 ! call random_number(planar)
 ! call random_number(phi)
-print*,"seed1=",seed1
-CALL init_genrand(seed1)
+print*,"seed key =",seed_val
+CALL init_genrand(seed_val)
 
 do xi=1,L
         planar(xi) = grnd()
