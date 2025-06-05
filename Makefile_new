@@ -1,0 +1,19 @@
+# Makefile
+
+CXX = g++
+CXXFLAGS = -std=c++17 -O2
+
+INCLUDES = -I$(HOME)/cnpy
+
+TARGET = alphadynamics_192_min_1pt20
+SRCS = alphadynamics_2.cpp $(HOME)/cnpy/cnpy.cpp
+
+all: $(TARGET)
+
+$(TARGET): $(SRCS)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $(LIBS) -o $(TARGET) $(SRCS)
+
+clean:
+	rm -f $(TARGET)
+
+

@@ -1,0 +1,21 @@
+CXX = g++
+CXXFLAGS = -std=c++17 -O2
+
+# Include paths
+INCLUDES = -I/usr/include/hdf5/serial -I$(HOME)/HighFive/include
+
+# Libraries and search paths
+LIBS = -L/usr/lib/x86_64-linux-gnu -lhdf5_cpp -lhdf5
+
+# Sources and target
+SRCS = alphadynamics_2.cpp
+TARGET = alphadynamics
+
+all: $(TARGET)
+
+$(TARGET): $(SRCS)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(TARGET) $(SRCS) $(LIBS)
+
+clean:
+	rm -f $(TARGET)
+
