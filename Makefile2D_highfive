@@ -1,0 +1,29 @@
+# Compiler: Use the MPI C++ wrapper
+CXX = mpic++
+CXXFLAGS = -std=c++17 -O3
+
+# --- Paths ---
+# IMPORTANT: You must update HDF5_PATH to point to your PARALLEL HDF5 installation.
+# The HighFive path should point to the header-only library location.
+HDF5_PATH = /path/to/parallel-hdf5
+HIGHFIVE_PATH = $(HOME)/HighFive
+
+# Include paths
+INCLUDES = -I$(HDF5_PATH)/include -I$(HIGHFIVE_PATH)/include
+
+# Libraries and search paths for PARALLEL HDF5
+LIBS = -L$(HDF5_PATH)/lib -lhdf5 -lhdf5_hl
+
+# --- Files ---
+# Source and target executable
+SRCS = alphadynamics_2D_hybrid_mpi.cpp
+TARGET = alphadynamics_2D_hybrid_mpi
+
+# --- Rules ---
+all: $(TARGET)
+
+$(TARGET): $(SRCS)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(TARGET) $(SRCS) $(LIBS)
+
+clean:
+	rm -f $(TARGET)
